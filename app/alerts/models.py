@@ -1,5 +1,5 @@
 from django.db import models
-# import django models
+
 class User(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
