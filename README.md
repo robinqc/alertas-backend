@@ -10,3 +10,5 @@ Api construida con Django rest framework y postgres
 2. Entrar a la  carpeta del proyecto: `cd alertas-backend/`
 3. Construir contenedores: `docker-compose up --build`
 4. El servidor estará escuchando en `http://localhost:8000`
+
+No es necesario construir los contenedores cada vez, se puede usar `docker-compose up`
