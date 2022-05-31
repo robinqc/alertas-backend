@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import Alert, History, User, Zone, Event
+from rest_framework_simplejwt.views import TokenObtainPairView
+from .models import Alert, History, PhoneNumber, Zone, Event
+from rest_framework.permissions import AllowAny
+from .serializers import AlertSerializer, EventSerializer, HistorySerializer, PhoneNumberSerializer, ZoneSerializer, MyTokenObtainPairSerializer
 
-from .serializers import AlertSerializer, EventSerializer, HistorySerializer, UserSerializer, ZoneSerializer
 
-
-class UserViewSet(ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class PhoneNumberViewSet(ModelViewSet):
+    queryset = PhoneNumber.objects.all()
+    serializer_class = PhoneNumberSerializer
 
 class ZoneViewSet(ModelViewSet):
     queryset = Zone.objects.all()
@@ -24,3 +25,19 @@ class AlertViewSet(ModelViewSet):
 class EventViewSet(ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+from django.contrib.auth.models import User
+from .serializers import RegisterSerializer
+from rest_framework import generics
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+
+class MyObtainTokenPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
+    
